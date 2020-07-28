@@ -11792,19 +11792,19 @@ kha__$Assets_SoundList.prototype = {
 	,__class__: kha__$Assets_SoundList
 };
 var kha__$Assets_BlobList = function() {
-	this.tilesForest_tsxDescription = { name : "tilesForest_tsx", file_sizes : [1105], files : ["tilesForest.tsx"], type : "blob"};
+	this.tilesForest_tsxDescription = { name : "tilesForest_tsx", file_sizes : [1072], files : ["tilesForest.tsx"], type : "blob"};
 	this.tilesForest_tsx = null;
-	this.testRoom_tmxDescription = { name : "testRoom_tmx", file_sizes : [3943], files : ["testRoom.tmx"], type : "blob"};
+	this.testRoom_tmxDescription = { name : "testRoom_tmx", file_sizes : [3886], files : ["testRoom.tmx"], type : "blob"};
 	this.testRoom_tmx = null;
-	this.ThirdMap_tmxDescription = { name : "ThirdMap_tmx", file_sizes : [66962], files : ["ThirdMap.tmx"], type : "blob"};
+	this.ThirdMap_tmxDescription = { name : "ThirdMap_tmx", file_sizes : [66298], files : ["ThirdMap.tmx"], type : "blob"};
 	this.ThirdMap_tmxName = "ThirdMap_tmx";
 	this.ThirdMap_tmx = null;
-	this.SecondMap_tmxDescription = { name : "SecondMap_tmx", file_sizes : [29808], files : ["SecondMap.tmx"], type : "blob"};
+	this.SecondMap_tmxDescription = { name : "SecondMap_tmx", file_sizes : [29691], files : ["SecondMap.tmx"], type : "blob"};
 	this.SecondMap_tmxName = "SecondMap_tmx";
 	this.SecondMap_tmx = null;
-	this.MapTest_tmxDescription = { name : "MapTest_tmx", file_sizes : [5208], files : ["MapTest.tmx"], type : "blob"};
+	this.MapTest_tmxDescription = { name : "MapTest_tmx", file_sizes : [5163], files : ["MapTest.tmx"], type : "blob"};
 	this.MapTest_tmx = null;
-	this.FirstMap_tmxDescription = { name : "FirstMap_tmx", file_sizes : [17786], files : ["FirstMap.tmx"], type : "blob"};
+	this.FirstMap_tmxDescription = { name : "FirstMap_tmx", file_sizes : [17641], files : ["FirstMap.tmx"], type : "blob"};
 	this.FirstMap_tmxName = "FirstMap_tmx";
 	this.FirstMap_tmx = null;
 };
@@ -23896,8 +23896,8 @@ states_GameOver.prototype = $extend(com_framework_utils_State.prototype,{
 	,__class__: states_GameOver
 });
 var states_GameState = function() {
-	this.heroY = 250;
-	this.heroX = 205;
+	this.heroY = 150;
+	this.heroX = 150;
 	com_framework_utils_State.call(this);
 };
 $hxClasses["states.GameState"] = states_GameState;
@@ -24045,7 +24045,7 @@ states_GameState.prototype = $extend(com_framework_utils_State.prototype,{
 		com_collision_platformer_CollisionEngine.overlap(gameObjects_GameData.endLevelCollisions,this.hero.collision,$bind(this,this.heroVsEndLevel));
 		com_collision_platformer_CollisionEngine.overlap(gameObjects_GameData.superStrongItemCollisions,this.hero.collision,$bind(this,this.heroVsSuperStrongItem));
 		com_collision_platformer_CollisionEngine.overlap(gameObjects_GameData.dialogCollisions,this.hero.collision,$bind(this,this.dialogVsHero));
-		com_collision_platformer_CollisionEngine.overlap(gameObjects_GameData.endGameCollisions,this.hero.collision,$bind(this,this.heroVsEndGame));
+		com_collision_platformer_CollisionEngine.collide(gameObjects_GameData.endGameCollisions,this.hero.collision,$bind(this,this.heroVsEndGame));
 		com_collision_platformer_CollisionEngine.collide(gameObjects_GameData.bulletCollisions,this.worldMap.collision);
 		com_collision_platformer_CollisionEngine.overlap(gameObjects_GameData.bulletCollisions,gameObjects_GameData.enemyCollisions,$bind(this,this.bulletVsEnemy));
 		com_collision_platformer_CollisionEngine.overlap(gameObjects_GameData.bulletCollisions,gameObjects_GameData.chaserCollisions,$bind(this,this.bulletVsChaser));
@@ -24103,7 +24103,6 @@ states_GameState.prototype = $extend(com_framework_utils_State.prototype,{
 		itemCollision.userData.getPicked();
 	}
 	,heroVsEndGame: function(endGameCollision,heroCollision) {
-		gameObjects_GameData.clear();
 		this.changeState(new states_Win());
 	}
 	,bulletVsEnemy: function(bulletCollision,enemyCollision) {
@@ -24146,6 +24145,7 @@ states_Win.prototype = $extend(com_framework_utils_State.prototype,{
 		resources.add(atlas);
 	}
 	,init: function() {
+		gameObjects_GameData.clear();
 		com_soundLib_SoundManager.stopMusic();
 		com_soundLib_SoundManager.playMusic("winMusic");
 		var display = new com_gEngine_display_Text(kha_Assets.fonts.Kenney_PixelName);
